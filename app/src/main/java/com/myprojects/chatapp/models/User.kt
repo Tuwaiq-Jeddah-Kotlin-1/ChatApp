@@ -1,4 +1,4 @@
-package com.myprojects.chatapp
+package com.myprojects.chatapp.models
 
 import android.net.Uri
 import java.util.*
