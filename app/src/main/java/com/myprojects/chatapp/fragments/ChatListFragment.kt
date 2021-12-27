@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.myprojects.chatapp.R
 
 
-class ChatsFragment : Fragment() {
+class ChatListFragment : Fragment() {
 
 
     override fun onCreateView(
