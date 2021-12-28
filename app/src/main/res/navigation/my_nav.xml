@@ -28,5 +28,5 @@
         android:id="@+id/chatsFragment"
         android:name="com.myprojects.chatapp.fragments.ChatListFragment"
         android:label="fragment_chats"
-        tools:layout="@layout/fragment_chats" />
+        tools:layout="@layout/fragment_list_chat" />
 </navigation>
