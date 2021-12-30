@@ -31,6 +31,4 @@ class ChatListAdapter(val chatList: ArrayList<ChatList>) : RecyclerView.Adapter<
     override fun getItemCount(): Int {
         return chatList.size
     }
-
-
 }
