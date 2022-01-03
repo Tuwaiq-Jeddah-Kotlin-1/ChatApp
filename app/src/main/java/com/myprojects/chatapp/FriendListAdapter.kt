@@ -9,9 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.myprojects.chatapp.models.User
 
 class FriendListAdapter(val friendList: ArrayList<User>) : RecyclerView.Adapter<FriendListAdapter.FriendViewHolder>() {
-    class FriendViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class FriendViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val profilePic = itemView.findViewById<ImageView>(R.id.friendProfilePicIV)
         val friendUserName = itemView.findViewById<TextView>(R.id.friendUserNameTV)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+        override fun onClick(p0: View?) {
+
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendViewHolder {
