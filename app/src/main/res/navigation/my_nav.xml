@@ -14,7 +14,7 @@
             app:destination="@id/signupFragment" />
         <action
             android:id="@+id/action_loginFragment_to_chatsFragment"
-            app:destination="@id/chatsFragment" />
+            app:destination="@id/chatListFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -25,8 +25,13 @@
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
-        android:id="@+id/chatsFragment"
+        android:id="@+id/chatListFragment"
         android:name="com.myprojects.chatapp.fragments.ChatListFragment"
         android:label="fragment_chats"
         tools:layout="@layout/fragment_list_chat" />
+    <fragment
+        android:id="@+id/friendListFragment"
+        android:name="com.myprojects.chatapp.fragments.FriendListFragment"
+        android:label="fragment_friend_list"
+        tools:layout="@layout/fragment_friend_list" />
 </navigation>
