@@ -5,6 +5,7 @@ import java.util.*
 
 data class User(val id: String,
                 val userName: String,
-                val profilePicture: Uri? = null,
+                val userEmail: String,
+                val profilePicture: String? = null,
                 val friends: List<User>? = null,
                 val memberSince: Date)

@@ -83,7 +83,7 @@ class SignupFragment : Fragment() {
                             if (task.isSuccessful) {
                                 //firebase register user
                                 val firebaseUser: FirebaseUser = task.result!!.user!!
-                                val user = User(userID, userName, null, null, birthday)
+                                val user = User(userID, userName, email, null,null, birthday)
                                 addUser(user)
 
                                 Toast.makeText(
