@@ -28,10 +28,23 @@
         android:id="@+id/chatListFragment"
         android:name="com.myprojects.chatapp.fragments.ChatListFragment"
         android:label="fragment_chats"
-        tools:layout="@layout/fragment_list_chat" />
+        tools:layout="@layout/fragment_list_chat" >
+        <action
+            android:id="@+id/action_chatListFragment_to_chatFragment"
+            app:destination="@id/chatFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/friendListFragment"
         android:name="com.myprojects.chatapp.fragments.FriendListFragment"
         android:label="fragment_friend_list"
         tools:layout="@layout/fragment_friend_list" />
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.myprojects.chatapp.fragments.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" >
+        <argument
+            android:name="friend"
+            app:argType="com.myprojects.chatapp.models.User" />
+    </fragment>
 </navigation>
