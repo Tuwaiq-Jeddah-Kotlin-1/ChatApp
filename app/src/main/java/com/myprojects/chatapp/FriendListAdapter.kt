@@ -1,23 +1,27 @@
 package com.myprojects.chatapp
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.myprojects.chatapp.models.User
 
 class FriendListAdapter(val friendList: ArrayList<User>) : RecyclerView.Adapter<FriendListAdapter.FriendViewHolder>() {
-    class FriendViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class FriendViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val profilePic = itemView.findViewById<ImageView>(R.id.friendProfilePicIV)
         val friendUserName = itemView.findViewById<TextView>(R.id.friendUserNameTV)
 
         init {
             itemView.setOnClickListener(this)
         }
-        override fun onClick(p0: View?) {
-
+        override fun onClick(view: View?) {
+            val argument = bundleOf("friend" to friendList[position])
+            Navigation.findNavController(view!!).navigate(R.id.chatFragment,argument)
         }
     }
 
