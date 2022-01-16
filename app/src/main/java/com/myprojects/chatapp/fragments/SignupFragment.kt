@@ -19,7 +19,13 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.myprojects.chatapp.R
 import com.myprojects.chatapp.models.User
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import java.util.*
+import kotlin.collections.ArrayList
 
 class SignupFragment : Fragment() {
 
@@ -72,7 +78,7 @@ class SignupFragment : Fragment() {
                     val email: String = emailET.text.toString().trim { it <= ' ' }
                     val password: String = passwordET.text.toString().trim { it <= ' ' }
                     //val birthday: String = birthdayET.text.toString().trim { it <= ' ' }
-                    val birthday = Date(2021,5,2)
+                    val memberSince = Date(2021,5,2).toString()
 
 
                     // create an instance and create a register with email and password
@@ -82,8 +88,7 @@ class SignupFragment : Fragment() {
                             // if the registration is successfully done
                             if (task.isSuccessful) {
                                 //firebase register user
-                                val firebaseUser: FirebaseUser = task.result!!.user!!
-                                val user = User(userID, userName, email, null,null, birthday)
+                                val user = User(userID, userName, email, null, memberSince)
                                 addUser(user)
 
                                 Toast.makeText(
@@ -108,15 +113,18 @@ class SignupFragment : Fragment() {
         return view
     }
 
-    private fun addUser(user : User){
-        userCollectionRef.add(user).addOnCompleteListener { task ->
-            if(task.isSuccessful){
-                Toast.makeText(context, "Successfully saved data", Toast.LENGTH_LONG).show()
-            } else{
-                Toast.makeText(context, "error", Toast.LENGTH_LONG).show()
+    fun addUser(user: User) = CoroutineScope(Dispatchers.IO).launch {
+        val userUid = FirebaseAuth.getInstance().currentUser!!.uid
+        try {
+            userCollectionRef.document("$userUid").set(user).await()
+            withContext(Dispatchers.Main) {
+                Toast.makeText(context, "Successfully saved data", Toast.LENGTH_LONG)
+                    .show()
             }
-        }.addOnFailureListener {
-            println(it.message)
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
