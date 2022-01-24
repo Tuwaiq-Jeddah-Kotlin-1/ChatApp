@@ -1,6 +1,7 @@
 package com.myprojects.chatapp
 
 import android.text.Layout
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,6 +56,12 @@ class MessageAdapter(val mList: ArrayList<Message>) :
         } else {
             return ITEM_RECEIVED
         }
+    }
+
+    fun clear(){
+        val size = mList.size
+        mList.clear()
+        notifyItemRangeRemoved(0,size)
     }
 
     override fun getItemCount(): Int {

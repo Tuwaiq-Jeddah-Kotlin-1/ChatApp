@@ -73,7 +73,7 @@ class SignupFragment : Fragment() {
 
                 }
                 else -> {
-                    val userID: String = FirebaseAuth.getInstance().currentUser?.uid.toString()
+                    //val userID: String = FirebaseAuth.getInstance().currentUser?.uid.toString()
                     val userName: String = usernameET.text.toString().trim { it <= ' ' }
                     val email: String = emailET.text.toString().trim { it <= ' ' }
                     val password: String = passwordET.text.toString().trim { it <= ' ' }
@@ -88,7 +88,8 @@ class SignupFragment : Fragment() {
                             // if the registration is successfully done
                             if (task.isSuccessful) {
                                 //firebase register user
-                                val user = User(userID, userName, email, null, memberSince)
+                                val userID: String = FirebaseAuth.getInstance().currentUser?.uid.toString()
+                                val user = User(userID, userName, email, null, null,memberSince)
                                 addUser(user)
 
                                 Toast.makeText(
@@ -99,7 +100,7 @@ class SignupFragment : Fragment() {
 
                                 findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
                             } else {
-                                // if the registreation is not succsesful then show error massage
+                                // if the registration is not successful then show error massage
                                 Toast.makeText(
                                     context,
                                     task.exception?.localizedMessage,
@@ -116,7 +117,7 @@ class SignupFragment : Fragment() {
     fun addUser(user: User) = CoroutineScope(Dispatchers.IO).launch {
         val userUid = FirebaseAuth.getInstance().currentUser!!.uid
         try {
-            userCollectionRef.document("$userUid").set(user).await()
+            userCollectionRef.document(user.id).set(user).await()
             withContext(Dispatchers.Main) {
                 Toast.makeText(context, "Successfully saved data", Toast.LENGTH_LONG)
                     .show()

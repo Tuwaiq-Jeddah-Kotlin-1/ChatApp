@@ -10,6 +10,8 @@ import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.myprojects.chatapp.models.User
 
 class FriendListAdapter(val friendList: ArrayList<User>) : RecyclerView.Adapter<FriendListAdapter.FriendViewHolder>() {
@@ -22,8 +24,9 @@ class FriendListAdapter(val friendList: ArrayList<User>) : RecyclerView.Adapter<
             itemView.setOnClickListener(this)
         }
         override fun onClick(view: View?) {
-            val argument = bundleOf("fromId" to currentUid,
-                "toId" to friendList[position].id)
+            val argument = bundleOf("fromUser" to currentUid,
+                "toUser" to friendList[position],
+            "roomId" to "noRoomId")
             Navigation.findNavController(view!!).navigate(R.id.chatFragment,argument)
         }
     }
@@ -41,4 +44,5 @@ class FriendListAdapter(val friendList: ArrayList<User>) : RecyclerView.Adapter<
     override fun getItemCount(): Int {
         return friendList.size
     }
+
 }

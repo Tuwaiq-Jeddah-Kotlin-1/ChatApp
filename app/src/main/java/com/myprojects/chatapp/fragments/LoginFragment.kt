@@ -11,6 +11,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.myprojects.chatapp.MainActivity
 import com.myprojects.chatapp.R
 
 
@@ -45,6 +48,7 @@ class LoginFragment : Fragment() {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
                     .addOnCompleteListener { task ->
                        if (task.isSuccessful){
+                           (activity as MainActivity).setCurrentUser()
                             Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_chatsFragment)
                        }else{
                            Toast.makeText(context, "Wrong email or password", Toast.LENGTH_SHORT).show()
