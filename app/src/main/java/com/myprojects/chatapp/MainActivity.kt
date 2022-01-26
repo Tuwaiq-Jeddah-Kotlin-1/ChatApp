@@ -1,11 +1,14 @@
 package com.myprojects.chatapp
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -23,6 +26,7 @@ import kotlinx.coroutines.tasks.await
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var currentUser: User
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,20 +40,7 @@ class MainActivity : AppCompatActivity() {
             bottomNav.setupWithNavController(navController)
         }
 
-
-        var user = User()
-        Firebase.firestore.collection("users")
-            .document("nwhdk6pG3UgXTlQMy8GHpWOYa9t2")
-            .get().addOnCompleteListener {
-                if (it.isSuccessful){
-                    user = it.result?.toObject(User::class.java)!!
-                    Firebase.firestore.collection("friends")
-                        .document("tyq8x73HB0MBvutTDCpiv0dyQET2")
-                        .collection("friendList")
-                        .document(user.id)
-                        .set(user)
-                }
-            }
+        sharedPref = getSharedPreferences("stayLoggedIn", Context.MODE_PRIVATE)
 
 
     }
@@ -83,6 +74,10 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.action_logout -> {
+                sharedPref.edit().putBoolean("loggedIn",false).apply()
+                FirebaseAuth.getInstance().signOut()
+                supportFragmentManager
+                    .findFragmentById(R.id.fragmentContainerView)?.findNavController()?.navigate(R.id.loginFragment)
                 true
             }
             else -> false

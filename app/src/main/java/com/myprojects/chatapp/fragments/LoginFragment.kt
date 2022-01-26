@@ -78,8 +78,9 @@ class LoginFragment : Fragment() {
             sharedPref.edit().putString("userId", FirebaseAuth.getInstance().uid).apply()
         }
 
-
         return view
     }
+
+
 
 }
