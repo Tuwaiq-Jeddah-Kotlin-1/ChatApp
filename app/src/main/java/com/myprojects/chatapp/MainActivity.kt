@@ -3,6 +3,9 @@ package com.myprojects.chatapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -64,5 +67,25 @@ class MainActivity : AppCompatActivity() {
 
     fun getCurrentUser(): User{
         return currentUser
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        MenuInflater(this).inflate(R.menu.main_menu,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_profile -> {
+                true
+            }
+            R.id.action_settings -> {
+                true
+            }
+            R.id.action_logout -> {
+                true
+            }
+            else -> false
+        }
     }
 }
