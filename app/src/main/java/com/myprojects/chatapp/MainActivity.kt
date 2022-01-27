@@ -68,16 +68,26 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.action_profile -> {
+                supportFragmentManager
+                    .findFragmentById(R.id.fragmentContainerView)
+                    ?.findNavController()
+                    ?.navigate(R.id.profileFragment)
                 true
             }
             R.id.action_settings -> {
+                supportFragmentManager
+                    .findFragmentById(R.id.fragmentContainerView)
+                    ?.findNavController()
+                    ?.navigate(R.id.settingsFragment)
                 true
             }
             R.id.action_logout -> {
                 sharedPref.edit().putBoolean("loggedIn",false).apply()
                 FirebaseAuth.getInstance().signOut()
                 supportFragmentManager
-                    .findFragmentById(R.id.fragmentContainerView)?.findNavController()?.navigate(R.id.loginFragment)
+                    .findFragmentById(R.id.fragmentContainerView)
+                    ?.findNavController()
+                    ?.navigate(R.id.loginFragment)
                 true
             }
             else -> false

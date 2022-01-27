@@ -47,4 +47,14 @@
             android:name="friend"
             app:argType="com.myprojects.chatapp.models.User" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.myprojects.chatapp.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.myprojects.chatapp.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
