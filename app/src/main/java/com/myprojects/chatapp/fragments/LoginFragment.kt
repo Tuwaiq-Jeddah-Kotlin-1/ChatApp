@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -19,6 +21,7 @@ import com.myprojects.chatapp.R
 
 class LoginFragment : Fragment() {
 
+    private lateinit var bottomNav: BottomNavigationView
     private lateinit var signupTextView: TextView
     private lateinit var signInButton: Button
     private lateinit var emailEditText: EditText
@@ -31,12 +34,16 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
 
+        bottomNav = requireActivity().findViewById(R.id.mainBottomNav)
+        bottomNav.visibility = View.GONE
+
         sharedPref = requireContext().getSharedPreferences("stayLoggedIn", Context.MODE_PRIVATE)
 
-        if (sharedPref.getBoolean("loggedIn",false)){
+        if (sharedPref.getBoolean("loggedIn", false)) {
             findNavController(this).navigate(R.id.action_loginFragment_to_chatsFragment)
         }
 
@@ -54,19 +61,22 @@ class LoginFragment : Fragment() {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 
-            if (!(email.isNullOrEmpty() && password.isNullOrEmpty())){
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
+            if (!(email.isNullOrEmpty() && password.isNullOrEmpty())) {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
-                       if (task.isSuccessful){
-                           (activity as MainActivity).setCurrentUser()
+                        if (task.isSuccessful) {
+                            (activity as MainActivity).setCurrentUser()
 
-                            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_chatsFragment)
-                       }else{
-                           Toast.makeText(context, "Wrong email or password", Toast.LENGTH_SHORT).show()
-                       }
+                            Navigation.findNavController(view)
+                                .navigate(R.id.action_loginFragment_to_chatsFragment)
+                        } else {
+                            Toast.makeText(context, "Wrong email or password", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }
-            }else{
-                Toast.makeText(context,"Please enter email and password",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Please enter email and password", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
@@ -80,7 +90,6 @@ class LoginFragment : Fragment() {
 
         return view
     }
-
 
 
 }

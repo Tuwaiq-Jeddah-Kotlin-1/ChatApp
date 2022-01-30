@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -35,6 +36,7 @@ class SignupFragment : Fragment() {
     private lateinit var emailET: TextInputEditText
     private lateinit var passwordET: TextInputEditText
     private val userCollectionRef = Firebase.firestore.collection("users")
+    private lateinit var bottomNav: BottomNavigationView
 
 
     override fun onCreateView(
@@ -43,6 +45,9 @@ class SignupFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_signup, container, false)
+
+        bottomNav = requireActivity().findViewById(R.id.mainBottomNav)
+        bottomNav.visibility = View.GONE
 
         signinTextView = view.findViewById(R.id.signInTV)
         signinTextView.setOnClickListener {
