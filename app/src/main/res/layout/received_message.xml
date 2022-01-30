@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:padding="8dp"
+        android:layout_margin="8dp"
         android:background="@drawable/received_background"
         android:textSize="20sp"
         tools:text="This is a received message" />

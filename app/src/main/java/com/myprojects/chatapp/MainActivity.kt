@@ -47,11 +47,11 @@ class MainActivity : AppCompatActivity() {
 
     fun setCurrentUser() = CoroutineScope(Dispatchers.IO).launch{
         Log.d("TAG", "${FirebaseAuth.getInstance().uid}")
-        FirebaseAuth.getInstance().uid?.let {
+        FirebaseAuth.getInstance().uid?.let { it ->
             Firebase.firestore.collection("users")
                 .document(it)
-                .get().addOnCompleteListener {
-                    if (it.isSuccessful) currentUser = it.result?.toObject(User::class.java)!!
+                .get().addOnCompleteListener { task ->
+                    if (task.isSuccessful) currentUser = task.result?.toObject(User::class.java)!!
                 }
         }
     }

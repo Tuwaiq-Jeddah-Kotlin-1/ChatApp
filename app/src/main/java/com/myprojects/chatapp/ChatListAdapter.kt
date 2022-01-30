@@ -11,7 +11,7 @@ import com.myprojects.chatapp.models.ChatList
 class ChatListAdapter(val chatList: ArrayList<ChatList>) : RecyclerView.Adapter<ChatListAdapter.ChatViewHolder>() {
     class ChatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val chatPicture = itemView.findViewById<ImageView>(R.id.chatPictureIV)
-        val chatTitle = itemView.findViewById<TextView>(R.id.chatTitleTV)
+        val chatReceiver = itemView.findViewById<TextView>(R.id.chatReceiverTV)
         val chatLastMessage = itemView.findViewById<TextView>(R.id.chatLastMessageTV)
         val chatLastActivityTime = itemView.findViewById<TextView>(R.id.chatLastActivityTime)
     }
@@ -23,7 +23,7 @@ class ChatListAdapter(val chatList: ArrayList<ChatList>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
-        holder.chatTitle.text = chatList[position].title
+        holder.chatReceiver.text = chatList[position].receiverUserName
         holder.chatLastMessage.text = chatList[position].lastMessage
         holder.chatLastActivityTime.text = chatList[position].lastActivityTime
     }
