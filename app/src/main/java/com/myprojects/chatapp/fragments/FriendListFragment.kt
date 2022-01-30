@@ -2,10 +2,9 @@ package com.myprojects.chatapp.fragments
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,7 +15,6 @@ import com.myprojects.chatapp.FriendListAdapter
 import com.myprojects.chatapp.R
 import com.myprojects.chatapp.models.User
 import com.myprojects.chatapp.utils.Utils
-import kotlinx.coroutines.tasks.await
 import kotlin.math.log
 
 
@@ -41,6 +39,8 @@ class FriendListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
+
         bottomNav = requireActivity().findViewById(R.id.mainBottomNav)
         bottomNav.visibility = View.VISIBLE
 
@@ -86,5 +86,49 @@ class FriendListFragment : Fragment() {
         }
         return list
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.friend_list_menu,menu)
+        val TAG = "searchView"
+        val searchIcon: MenuItem = menu!!.findItem(R.id.app_bar_search)
+        val searchView = searchIcon.actionView as SearchView
+        searchView.apply {
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    Log.d(TAG,"QueryTextSubmit: $query")
+                    showSearchResult(query)
+                    return true
+                }
+
+                override fun onQueryTextChange(query: String?): Boolean {
+                    return false
+                }
+            })
+        }.setOnCloseListener {
+            getFriendList(object : Callback {
+                override fun onCallback(value: ArrayList<User>) {
+                    friendsRecyclerView.adapter = FriendListAdapter(value)
+                }
+            })
+            true
+        }
+        super.onCreateOptionsMenu(menu,inflater)
+    }
+
+    private fun showSearchResult(query: String?) {
+        val searchResult = ArrayList<User>()
+        val TAG = "showSearchResult"
+        Firebase.firestore.collection("users")
+            .whereGreaterThanOrEqualTo("userEmail", query.toString())
+            .whereLessThan("userEmail", query.toString() + "z")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents){
+                    searchResult.add(document.toObject(User::class.java))
+                }
+                friendsRecyclerView.adapter = FriendListAdapter(searchResult)
+            }
+    }
+
 
 }
