@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ChatApp</string>
+    <string name="login" translatable="false">دخول</string>
+    <string name="don_t_have_an_account" translatable="false">لا تملك حساب؟</string>
+    <string name="menu_chats" translatable="false">المحادثات</string>
+    <string name="menu_friends" translatable="false">الأصدقاء</string>
+    <string name="email" translatable="false">البريد الالكتروني</string>
+    <string name="forgot_my_password" translatable="false">نسيت كلمة المرور</string>
+    <string name="remember_me" translatable="false">تذكرني</string>
+    <string name="write_a_message" translatable="false">اكتب رسالة</string>
+    <string name="do_you_have_an_account" translatable="false">هل تملك حسابا؟</string>
+    <string name="sign_in" translatable="false">سجل الدخول</string>
+    <string name="user_name" translatable="false">اسم المستخدم</string>
+    <string name="password" translatable="false">كلمة المرور</string>
+    <string name="log_in" translatable="false">سجل الدخول</string>
+    <string name="sign_up" translatable="false">انشئ حسابا</string>
+</resources>

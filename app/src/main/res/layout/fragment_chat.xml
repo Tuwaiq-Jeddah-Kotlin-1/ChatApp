@@ -26,7 +26,7 @@
         android:layout_marginBottom="12dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Write a message"
+        android:hint="@string/write_a_message"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sendIB"
         app:layout_constraintStart_toStartOf="parent"

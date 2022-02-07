@@ -4,6 +4,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">Login</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
-    <string name="menu_chats">Chats</string>
-    <string name="menu_friends">Friends</string>
+    <string name="menu_chats" translatable="false">Chats</string>
+    <string name="menu_friends" translatable="false">Friends</string>
+    <string name="sign_up" translatable="false">Sign up</string>
+    <string name="log_in" translatable="false">Log in</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="forgot_my_password" translatable="false">Forgot my password</string>
+    <string name="remember_me" translatable="false">remember me</string>
+    <string name="write_a_message" translatable="false">Write a message</string>
+    <string name="do_you_have_an_account" translatable="false">Do you have an account?</string>
+    <string name="sign_in" translatable="false">Sign in</string>
+    <string name="user_name" translatable="false">User Name</string>
 </resources>
