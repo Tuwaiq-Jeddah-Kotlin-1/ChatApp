@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.myprojects.chatapp.models.Message
+import com.myprojects.chatapp.utils.Utils
 import org.w3c.dom.Text
 
 class MessageAdapter(val mList: ArrayList<Message>) :
@@ -19,11 +20,12 @@ class MessageAdapter(val mList: ArrayList<Message>) :
 
     class SentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val sentMessage = itemView.findViewById<TextView>(R.id.sentTV)
-
+        val sentAt = itemView.findViewById<TextView>(R.id.sentAtTV)
     }
 
     class ReceivedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val receivedMessage = itemView.findViewById<TextView>(R.id.receivedTV)
+        val receivedAt = itemView.findViewById<TextView>(R.id.receivedAtTV)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -43,10 +45,12 @@ class MessageAdapter(val mList: ArrayList<Message>) :
         if (holder.javaClass == SentViewHolder::class.java) {
             val viewHolder = holder as SentViewHolder
             viewHolder.sentMessage.text = currentMessage.message
+            viewHolder.sentAt.text = Utils.formatTimeDate(currentMessage.sentAt)
         }
         if (holder.javaClass == ReceivedViewHolder::class.java) {
             val viewHolder = holder as ReceivedViewHolder
             viewHolder.receivedMessage.text = currentMessage.message
+            viewHolder.receivedAt.text = Utils.formatTimeDate(currentMessage.sentAt)
         }
     }
 

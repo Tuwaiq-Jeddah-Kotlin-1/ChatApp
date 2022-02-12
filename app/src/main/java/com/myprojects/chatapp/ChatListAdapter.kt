@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.myprojects.chatapp.models.ChatList
+import com.myprojects.chatapp.utils.Utils
 
 class ChatListAdapter(val chatList: ArrayList<ChatList>) : RecyclerView.Adapter<ChatListAdapter.ChatViewHolder>() {
     class ChatViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -25,7 +26,7 @@ class ChatListAdapter(val chatList: ArrayList<ChatList>) : RecyclerView.Adapter<
     override fun onBindViewHolder(holder: ChatViewHolder, position: Int) {
         holder.chatReceiver.text = chatList[position].receiverUserName
         holder.chatLastMessage.text = chatList[position].lastMessage
-        holder.chatLastActivityTime.text = chatList[position].lastActivityTime
+        holder.chatLastActivityTime.text = Utils.formatTimeDate(chatList[position].lastActivityTime.toLong())
     }
 
     override fun getItemCount(): Int {

@@ -61,12 +61,6 @@ class ChatFragment : Fragment() {
 
         messages = ArrayList()
 
-        val m1 = Message("Hello world", senderId, null)
-        val m2 = Message("dont hello me", receiverId, null)
-
-        val mList = arrayListOf(m1, m2)
-
-
         var senderRooms = senderReceiver[0]?.chatRooms
         var receiverRooms = senderReceiver[1]?.chatRooms
 
@@ -90,11 +84,6 @@ class ChatFragment : Fragment() {
         messagesRecyclerView = view.findViewById(R.id.messageRV)
         messagesRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        //messagesRecyclerView.adapter = MessageAdapter(mList)
-
-        GlobalScope.launch {
-
-        }
         updateChat()
 
         sendButton.setOnClickListener {
@@ -103,7 +92,7 @@ class ChatFragment : Fragment() {
             }
 
             val messageText = messageBox.text.toString()
-            val message = Message(messageText, senderId)
+            val message = Message(messageText, senderId, System.currentTimeMillis())
 
             val senderChatList = ChatList(
                 roomId,
@@ -154,11 +143,6 @@ class ChatFragment : Fragment() {
                 .document(roomId).collection("roomMessages")
                 .document(System.currentTimeMillis().toString()).set(message)
 
-//            rootRef.collection("chats").
-            GlobalScope.launch {
-
-                //updateChat()
-            }
             messageBox.text.clear()
             it.hideKeyboard()
         }

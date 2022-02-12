@@ -16,4 +16,13 @@
         android:textSize="20sp"
         tools:text="This is a received message" />
 
+    <TextView
+        android:id="@+id/receivedAtTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/receivedTV"
+        android:layout_marginEnd="8dp"
+        tools:text="10:45 pm yesterday" />
+
 </RelativeLayout>
