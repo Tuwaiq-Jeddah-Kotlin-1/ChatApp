@@ -5,9 +5,13 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.myprojects.chatapp.models.User
 import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
+import kotlin.math.abs
 import kotlin.reflect.KClass
 
 object Utils {
+
+    const val DAY_LENGTH_MILLIS = 86400000L
 
     fun <T : Any> mapToObject(map: Map<String, Any>, clazz: KClass<T>) : T {
         //Get default constructor
@@ -34,6 +38,17 @@ object Utils {
             }
         }?.await()
         return result
+    }
+
+    fun formatTimeDate(timeStamp: Long): String{
+        val currentTime = System.currentTimeMillis()
+        val compareFormatted = SimpleDateFormat("D")
+
+        if (compareFormatted.format(currentTime).equals(compareFormatted.format(timeStamp))){
+            return SimpleDateFormat("h:mm a").format(timeStamp)
+        } else{
+            return SimpleDateFormat("h:mm a '-' MMM d yyyy").format(timeStamp)
+        }
     }
 
 }
