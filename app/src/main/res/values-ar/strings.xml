@@ -15,4 +15,13 @@
     <string name="password" translatable="false">كلمة المرور</string>
     <string name="log_in" translatable="false">سجل الدخول</string>
     <string name="sign_up" translatable="false">انشئ حسابا</string>
+    <string name="log_out">تسجيل الخروج</string>
+    <string name="save">احفظ</string>
+    <string name="log_in_fragment">تسجيل الدخول</string>
+    <string name="signup_fragment">انشاء حساب</string>
+    <string name="chats_fragment">المحادثات</string>
+    <string name="friends_fragment">الاصدقاء</string>
+    <string name="profile_fragment">الحساب</string>
+    <string name="settings_fragment">الاعدادات</string>
+    <string name="chat_fragment">المحادثة</string>
 </resources>
