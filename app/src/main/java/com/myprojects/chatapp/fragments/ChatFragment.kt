@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -48,6 +49,8 @@ class ChatFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_chat, container, false)
+
+        (activity as AppCompatActivity).supportActionBar?.title = getSenderAndReceiver()[1].userName
 
         bottomNav = requireActivity().findViewById(R.id.mainBottomNav)
         bottomNav.visibility = View.GONE

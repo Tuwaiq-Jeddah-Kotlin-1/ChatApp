@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,6 +41,8 @@ class FriendListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
+
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.friends_fragment)
 
         bottomNav = requireActivity().findViewById(R.id.mainBottomNav)
         bottomNav.visibility = View.VISIBLE

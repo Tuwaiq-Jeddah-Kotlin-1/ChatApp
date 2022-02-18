@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.myprojects.chatapp.ChatListAdapter
+import com.myprojects.chatapp.MainActivity
 import com.myprojects.chatapp.R
 import com.myprojects.chatapp.models.ChatList
 
@@ -31,7 +32,8 @@ class ChatListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+        (activity as AppCompatActivity).supportActionBar?.show()
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.chats_fragment)
         // Inflate the layout for this fragment
         chatList = ArrayList()
 
