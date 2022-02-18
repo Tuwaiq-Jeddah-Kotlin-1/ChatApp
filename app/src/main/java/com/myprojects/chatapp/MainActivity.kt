@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         sharedPref = getSharedPreferences("stayLoggedIn", Context.MODE_PRIVATE)
 
+        //setCurrentUser()
 
     }
 
@@ -52,6 +53,8 @@ class MainActivity : AppCompatActivity() {
                 .document(it)
                 .get().addOnCompleteListener { task ->
                     if (task.isSuccessful) currentUser = task.result?.toObject(User::class.java)!!
+
+                    Log.d("111111111111111111111", "${getCurrentUser()}")
                 }
         }
     }
