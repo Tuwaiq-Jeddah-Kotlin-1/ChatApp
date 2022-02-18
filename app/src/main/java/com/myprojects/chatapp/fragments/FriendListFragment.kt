@@ -73,7 +73,6 @@ class FriendListFragment : Fragment() {
                     val user = snap.toObject(User::class.java)
                     friendList.add(user)
                 }
-
                 callback.onCallback(friendList)
             }
         }

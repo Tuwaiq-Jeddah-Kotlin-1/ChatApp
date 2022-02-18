@@ -96,15 +96,15 @@ class ChatFragment : Fragment() {
 
             val senderChatList = ChatList(
                 roomId,
-                senderReceiver[0].id,
-                senderReceiver[0].userName,
+                senderReceiver[1].id,
+                senderReceiver[1].userName,
                 messageText,
                 System.currentTimeMillis().toString()
             )
             val receiverChatList = ChatList(
                 roomId,
-                senderReceiver[1].id,
-                senderReceiver[1].userName,
+                senderReceiver[0].id,
+                senderReceiver[0].userName,
                 messageText,
                 System.currentTimeMillis().toString()
             )
