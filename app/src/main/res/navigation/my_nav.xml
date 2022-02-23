@@ -49,12 +49,12 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.myprojects.chatapp.SettingsFragment"
+        android:name="com.myprojects.chatapp.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.myprojects.chatapp.ProfileFragment"
+        android:name="com.myprojects.chatapp.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

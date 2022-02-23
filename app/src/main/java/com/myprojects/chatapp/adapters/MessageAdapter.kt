@@ -1,16 +1,14 @@
-package com.myprojects.chatapp
+package com.myprojects.chatapp.adapters
 
-import android.text.Layout
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.myprojects.chatapp.R
 import com.myprojects.chatapp.models.Message
 import com.myprojects.chatapp.utils.Utils
-import org.w3c.dom.Text
 
 class MessageAdapter(val mList: ArrayList<Message>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

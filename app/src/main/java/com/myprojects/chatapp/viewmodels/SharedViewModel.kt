@@ -1,4 +1,4 @@
-package com.myprojects.chatapp
+package com.myprojects.chatapp.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

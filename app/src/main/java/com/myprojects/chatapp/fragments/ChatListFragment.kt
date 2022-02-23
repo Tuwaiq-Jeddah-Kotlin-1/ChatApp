@@ -13,8 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.myprojects.chatapp.ChatListAdapter
-import com.myprojects.chatapp.MainActivity
+import com.myprojects.chatapp.adapters.ChatListAdapter
 import com.myprojects.chatapp.R
 import com.myprojects.chatapp.models.ChatList
 

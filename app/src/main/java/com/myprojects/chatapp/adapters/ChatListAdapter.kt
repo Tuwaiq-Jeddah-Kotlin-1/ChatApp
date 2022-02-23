@@ -1,4 +1,4 @@
-package com.myprojects.chatapp
+package com.myprojects.chatapp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.myprojects.chatapp.R
 import com.myprojects.chatapp.models.ChatList
 import com.myprojects.chatapp.models.User
 import com.myprojects.chatapp.utils.Utils

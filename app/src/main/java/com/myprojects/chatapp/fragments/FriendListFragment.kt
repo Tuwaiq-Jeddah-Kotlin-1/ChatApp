@@ -12,11 +12,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.myprojects.chatapp.FriendListAdapter
+import com.myprojects.chatapp.adapters.FriendListAdapter
 import com.myprojects.chatapp.R
 import com.myprojects.chatapp.models.User
 import com.myprojects.chatapp.utils.Utils
-import kotlin.math.log
 
 
 class FriendListFragment : Fragment() {

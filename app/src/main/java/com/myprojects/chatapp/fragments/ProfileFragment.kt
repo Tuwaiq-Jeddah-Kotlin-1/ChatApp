@@ -1,9 +1,8 @@
-package com.myprojects.chatapp
+package com.myprojects.chatapp.fragments
 
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,9 @@ import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.myprojects.chatapp.R
 import com.myprojects.chatapp.models.User
+import com.myprojects.chatapp.viewmodels.SharedViewModel
 
 
 class ProfileFragment : Fragment() {

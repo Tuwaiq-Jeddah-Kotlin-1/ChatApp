@@ -16,15 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.myprojects.chatapp.MainActivity
-import com.myprojects.chatapp.MessageAdapter
+import com.myprojects.chatapp.adapters.MessageAdapter
 import com.myprojects.chatapp.R
-import com.myprojects.chatapp.SharedViewModel
+import com.myprojects.chatapp.viewmodels.SharedViewModel
 import com.myprojects.chatapp.models.ChatList
 import com.myprojects.chatapp.models.Message
 import com.myprojects.chatapp.models.User
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlin.collections.ArrayList
 
 
