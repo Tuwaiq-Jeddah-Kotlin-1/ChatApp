@@ -25,7 +25,6 @@ import kotlinx.coroutines.tasks.await
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNav: BottomNavigationView
-    private lateinit var currentUser: User
     private lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,26 +41,8 @@ class MainActivity : AppCompatActivity() {
 
         sharedPref = getSharedPreferences("stayLoggedIn", Context.MODE_PRIVATE)
 
-        //setCurrentUser()
-
     }
 
-    fun setCurrentUser() = CoroutineScope(Dispatchers.IO).launch{
-        Log.d("TAG", "${FirebaseAuth.getInstance().uid}")
-        FirebaseAuth.getInstance().uid?.let { it ->
-            Firebase.firestore.collection("users")
-                .document(it)
-                .get().addOnCompleteListener { task ->
-                    if (task.isSuccessful) currentUser = task.result?.toObject(User::class.java)!!
-
-                    Log.d("111111111111111111111", "${getCurrentUser()}")
-                }
-        }
-    }
-
-    fun getCurrentUser(): User{
-        return currentUser
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         MenuInflater(this).inflate(R.menu.main_menu,menu)

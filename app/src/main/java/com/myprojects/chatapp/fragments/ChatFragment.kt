@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -18,6 +19,7 @@ import com.google.firebase.firestore.SetOptions
 import com.myprojects.chatapp.MainActivity
 import com.myprojects.chatapp.MessageAdapter
 import com.myprojects.chatapp.R
+import com.myprojects.chatapp.SharedViewModel
 import com.myprojects.chatapp.models.ChatList
 import com.myprojects.chatapp.models.Message
 import com.myprojects.chatapp.models.User
@@ -42,6 +44,7 @@ class ChatFragment : Fragment() {
     private val chatsCollectionRef = rootRef.collection("chats")
     private val messagesCollectionRef = rootRef.collection("messages")
     private val userCollectionRef = rootRef.collection("users")
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -186,7 +189,7 @@ class ChatFragment : Fragment() {
 
     private fun getSenderAndReceiver(): ArrayList<User> {
         val senderReceiverList = ArrayList<User>()
-        senderReceiverList.add((activity as MainActivity).getCurrentUser())//userCollectionRef.document(getSenderId()).get().result?.toObject(User::class.java)
+        senderReceiverList.add(sharedViewModel.getCurrentUser().value!!)
         senderReceiverList.add(requireArguments().get("toUser") as User)//userCollectionRef.document(getReceiverId()).get().result?.toObject(User::class.java)
 
         return senderReceiverList

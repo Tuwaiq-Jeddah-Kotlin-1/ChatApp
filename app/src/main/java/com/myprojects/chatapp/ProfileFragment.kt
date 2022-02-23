@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -28,6 +29,8 @@ class ProfileFragment : Fragment() {
     private lateinit var saveButton: Button
     private lateinit var logout: TextView
     private lateinit var currentUser: User
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,7 +41,7 @@ class ProfileFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.profile_fragment)
 
-        currentUser = (requireActivity() as MainActivity).getCurrentUser()
+        currentUser = sharedViewModel.getCurrentUser().value!! //(requireActivity() as MainActivity).getCurrentUser()
 
         profilePicture = view.findViewById(R.id.profilePictureIV)
         userEmail = view.findViewById(R.id.emailTV)
@@ -50,7 +53,8 @@ class ProfileFragment : Fragment() {
 
         saveButton.setOnClickListener {
             Firebase.firestore.collection("users").document(currentUser.id).update("userName", username.text.toString())
-            (requireActivity() as MainActivity).setCurrentUser()
+            //(requireActivity() as MainActivity).setCurrentUser()
+            sharedViewModel.setCurrentUser()
         }
 
         logout.setOnClickListener {

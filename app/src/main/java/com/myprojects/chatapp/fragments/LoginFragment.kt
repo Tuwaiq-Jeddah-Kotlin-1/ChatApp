@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -17,6 +18,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.myprojects.chatapp.MainActivity
 import com.myprojects.chatapp.R
+import com.myprojects.chatapp.SharedViewModel
 
 
 class LoginFragment : Fragment() {
@@ -29,6 +31,7 @@ class LoginFragment : Fragment() {
     private lateinit var stayLoggedIn: CheckBox
     private lateinit var sharedPref: SharedPreferences
     private var isChecked = false
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,8 +68,8 @@ class LoginFragment : Fragment() {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            (activity as MainActivity).setCurrentUser()
-
+                            //(activity as MainActivity).setCurrentUser()
+                            sharedViewModel.setCurrentUser()
                             Navigation.findNavController(view)
                                 .navigate(R.id.action_loginFragment_to_chatsFragment)
                         } else {
