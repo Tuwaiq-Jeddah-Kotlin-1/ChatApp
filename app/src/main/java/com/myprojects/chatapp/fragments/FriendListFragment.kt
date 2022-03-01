@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,24 +17,14 @@ import com.myprojects.chatapp.adapters.FriendListAdapter
 import com.myprojects.chatapp.R
 import com.myprojects.chatapp.models.User
 import com.myprojects.chatapp.utils.Utils
+import com.myprojects.chatapp.viewmodels.FriendListViewModel
 
 
 class FriendListFragment : Fragment() {
 
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var friendsRecyclerView: RecyclerView
-    private lateinit var adapter: FriendListAdapter
-    private val currentUserId = FirebaseAuth.getInstance().uid
-    private val userDocRef =
-        currentUserId?.let { Firebase.firestore.collection("users").document(it) }
-    private val userFriendsColRef =
-        currentUserId?.let {
-            Firebase.firestore.collection("friends").document(it).collection("friendList")
-        }
-
-    interface Callback {
-        fun onCallback(value: ArrayList<User>)
-    }
+    private lateinit var friendListVM: FriendListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,46 +37,23 @@ class FriendListFragment : Fragment() {
         bottomNav = requireActivity().findViewById(R.id.mainBottomNav)
         bottomNav.visibility = View.VISIBLE
 
+        friendListVM = ViewModelProvider(this).get(FriendListViewModel::class.java)
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_friend_list, container, false)
 
         friendsRecyclerView = view.findViewById(R.id.friendListRV)
 
-        getFriendList(object : Callback {
-            override fun onCallback(value: ArrayList<User>) {
-                Log.d("777777777777777", value.toString())
-                friendsRecyclerView.adapter = FriendListAdapter(value)
-            }
-
-        })
+        getFriendList()
         friendsRecyclerView.layoutManager = LinearLayoutManager(context)
-
 
         return view
     }
 
-    private fun getFriendList(callback: Callback) {
-
-        var friendList = ArrayList<User>()
-        userFriendsColRef?.get()?.addOnCompleteListener { snapshot ->
-            if (snapshot.isSuccessful) {
-
-                for (snap in snapshot.result!!) {
-                    val user = snap.toObject(User::class.java)
-                    friendList.add(user)
-                }
-                callback.onCallback(friendList)
-            }
-        }
-    }
-
-    private fun mapToList(map: ArrayList<Map<String, Any>>): ArrayList<User> {
-        val list = ArrayList<User>()
-        for (i in 0 until map.size) {
-            list.add(Utils.mapToObject(map[i], User::class))
-        }
-        return list
+    fun getFriendList(){
+        friendListVM.getFriendList().observe(viewLifecycleOwner, { list ->
+            friendsRecyclerView.adapter = FriendListAdapter(list)
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -106,11 +74,7 @@ class FriendListFragment : Fragment() {
                 }
             })
         }.setOnCloseListener {
-            getFriendList(object : Callback {
-                override fun onCallback(value: ArrayList<User>) {
-                    friendsRecyclerView.adapter = FriendListAdapter(value)
-                }
-            })
+            getFriendList()
             true
         }
         super.onCreateOptionsMenu(menu,inflater)
@@ -118,7 +82,6 @@ class FriendListFragment : Fragment() {
 
     private fun showSearchResult(query: String?) {
         val searchResult = ArrayList<User>()
-        val TAG = "showSearchResult"
         Firebase.firestore.collection("users")
             .whereGreaterThanOrEqualTo("userEmail", query.toString())
             .whereLessThan("userEmail", query.toString() + "z")
@@ -130,6 +93,4 @@ class FriendListFragment : Fragment() {
                 friendsRecyclerView.adapter = FriendListAdapter(searchResult)
             }
     }
-
-
 }
