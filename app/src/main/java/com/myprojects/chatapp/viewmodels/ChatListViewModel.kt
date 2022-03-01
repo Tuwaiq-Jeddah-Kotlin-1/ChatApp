@@ -13,24 +13,27 @@ class ChatListViewModel : ViewModel() {
 
     init {
         chatList.value = ArrayList()
+        setChatList()
     }
 
-    fun getChatList(): LiveData<ArrayList<ChatList>> {
+    fun setChatList() {
         val uid = FirebaseAuth.getInstance().uid
         Firebase.firestore
             .collection("chats")
             .document(uid!!)
             .collection("userChatRooms")
-            .get()
-            .addOnCompleteListener { snapshot ->
-                if (snapshot.isSuccessful) {
-                    for (snap in snapshot.result!!) {
-                        chatList.value?.clear()
+            .addSnapshotListener { snapshot, error ->
+                if (snapshot != null) {
+                    chatList.value?.clear()
+                    for (snap in snapshot) {
                         chatList.value?.add(snap.toObject(ChatList::class.java))
                         chatList.postValue(chatList.value)
                     }
                 }
             }
+    }
+
+    fun getChatList(): LiveData<ArrayList<ChatList>> {
         return chatList
     }
 }
