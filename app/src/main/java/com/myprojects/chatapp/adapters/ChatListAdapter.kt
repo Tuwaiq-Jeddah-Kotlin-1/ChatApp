@@ -46,7 +46,7 @@ class ChatListAdapter(val chatList: ArrayList<ChatList>) :
                     val arguments = bundleOf(
                         "fromUser" to currentUid,
                         "toUser" to toUser,
-                        "roomId" to "noRoomId"
+                        "roomId" to chatList[position].roomId
                     )
                     Navigation.findNavController(view!!).navigate(R.id.chatFragment, arguments)
                 }
