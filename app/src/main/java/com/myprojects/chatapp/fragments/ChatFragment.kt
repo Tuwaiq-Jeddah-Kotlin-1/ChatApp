@@ -23,6 +23,7 @@ import com.myprojects.chatapp.viewmodels.SharedViewModel
 import com.myprojects.chatapp.models.ChatList
 import com.myprojects.chatapp.models.Message
 import com.myprojects.chatapp.models.User
+import com.myprojects.chatapp.utils.Utils
 import com.myprojects.chatapp.viewmodels.ChatViewModel
 import kotlin.collections.ArrayList
 
@@ -53,8 +54,7 @@ class ChatFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.title = getSenderAndReceiver()[1].userName
 
-        bottomNav = requireActivity().findViewById(R.id.mainBottomNav)
-        bottomNav.visibility = View.GONE
+        Utils.hideBottomNav(this)
 
         chatVM = ViewModelProvider(this).get(ChatViewModel::class.java)
 

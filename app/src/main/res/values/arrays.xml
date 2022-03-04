@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="language_entries">
+        <item>System default</item>
+        <item>English</item>
+        <item>Arabic</item>
+    </string-array>
+</resources>
